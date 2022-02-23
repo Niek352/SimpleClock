@@ -195,7 +195,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8508129935370727188}
   - component: {fileID: 8508129935370727189}
-  - component: {fileID: 3264479445059869092}
   m_Layer: 5
   m_Name: Clock
   m_TagString: Untagged
@@ -240,34 +239,8 @@ MonoBehaviour:
   _minuteHand: {fileID: 8508129936120314228}
   _hoursHand: {fileID: 8508129935100220286}
   _textClock: {fileID: 8508129935986840911}
-  dateGetter: {fileID: 3264479445059869092}
   _clockSpeed: 1
   _currentTime: 0
---- !u!114 &3264479445059869092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8508129935370727191}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4c283b83e98e2c4dbbec4e8be4c88f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CurrentTimestamp: 0
-  IsComplete: 0
-  Data: 
-  resp:
-    id: 
-    currentDateTime: 
-    utcOffset: 
-    isDayLightSavingsTime: 0
-    dayOfTheWeek: 
-    timeZoneName: 
-    currentFileTime: 0
-    ordinalDate: 
-    serviceResponse: 
 --- !u!1 &8508129935958284304
 GameObject:
   m_ObjectHideFlags: 0

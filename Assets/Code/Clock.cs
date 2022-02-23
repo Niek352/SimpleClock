@@ -16,7 +16,7 @@ namespace Clock
         [SerializeField] private Transform _hoursHand;
 
         [SerializeField] private TMP_Text _textClock;
-        [SerializeField] private DateGetter dateGetter;
+        [SerializeField] private DateGetter _dateGetter;
         
         
         [SerializeField, Range(0,10000)] private float _clockSpeed;
@@ -26,6 +26,9 @@ namespace Clock
 
         private void Start()
         {
+            _dateGetter = new DateGetter();
+
+
             StartCoroutine(SetupDate());
             
                
@@ -45,15 +48,15 @@ namespace Clock
 
         private IEnumerator SetupDate()
         {
-            yield return dateGetter.GetCurrentDateTime();
+            yield return _dateGetter.GetCurrentDateTime();
 
-            while (dateGetter.IsComplete == false)
+            while (_dateGetter.IsComplete == false)
             {
                 yield return null;
             }
 
 
-            SetDate(dateGetter.CurrentTimestamp);
+            SetDate(_dateGetter.CurrentTimestamp);
         }
 
 

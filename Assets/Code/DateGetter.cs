@@ -3,13 +3,12 @@ using System;
 using UnityEngine.Networking;
 using System.Collections;
 using System.Net.Http;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Xml;
+
 
 namespace Clock
 {
-    public class DateGetter : MonoBehaviour
+    [Serializable]
+    public class DateGetter 
     {
         public DateTime CurrentDateTime;
         public float CurrentTimestamp;
@@ -18,14 +17,9 @@ namespace Clock
         public string Data;
         private const string Url = "http://worldtimeapi.org/api/ip";
         
-        [SerializeField] private Responce resp;
+        private Responce resp;
 
         public IEnumerator GetCurrentDateTime()
-        {
-            return GetTimeFromWorldApi();
-        }
-
-        private IEnumerator GetTimeFromWorldApi()
         {
             var www = UnityWebRequest.Get(Url);
             yield return www.SendWebRequest();
@@ -40,12 +34,14 @@ namespace Clock
             }
             else
             {
-                
-                GetMessage();
+
+                TryGetCurrentTimeFromRapidApi();
             }
 
         }
-        public async void GetMessage()
+
+       
+        private async void TryGetCurrentTimeFromRapidApi()
         {
             var client = new HttpClient();
             var request = new HttpRequestMessage
@@ -63,13 +59,14 @@ namespace Clock
                 response.EnsureSuccessStatusCode();
                 var body = response.Content.ReadAsStringAsync();
 
-
-
-
                 Data = body.Result;
+
+
                 resp = (Responce)JsonUtility.FromJson(Data, typeof(Responce));
+
                 CurrentDateTime = DateTime.FromFileTime(resp.currentFileTime);
                 CurrentTimestamp = (float)CurrentDateTime.TimeOfDay.TotalSeconds;
+
                 IsComplete = true;
             }
             //{"$id":"1","currentDateTime":"2022-02-23T18:13Z","utcOffset":"00:00:00","isDayLightSavingsTime":false,"dayOfTheWeek":"Wednesday","timeZoneName":"UTC","currentFileTime":132901136079667670,"ordinalDate":"2022-54","serviceResponse":null}
