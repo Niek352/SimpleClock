@@ -24,21 +24,33 @@ namespace Clock
         private DateTime _dateTime;
 
 
+        [Header("Debug")]
+        [SerializeField] private bool _useLocalTime;
+        [SerializeField] private float _startLocalTime;
+
+        public float CurrentTime { get => _currentTime;  }
+
         private void Start()
         {
             _dateGetter = new DateGetter();
 
-
-            StartCoroutine(SetupDate());
             
-               
+            
+
+            if (_useLocalTime)
+            {
+                SetDate(_startLocalTime);
+            }
+            else
+            {
+                StartCoroutine(SetupDate());
+            }
         }
         
 
 
         private void FixedUpdate()
         {
-            _dateTime = DateTime.Now;
 
             _currentTime += Time.fixedDeltaTime * _clockSpeed;
 
@@ -68,7 +80,7 @@ namespace Clock
 
         private void SetDate(float timestamp)
         {
-            _currentTime = timestamp;
+            _currentTime = timestamp % 86400;
         }
         private void CalculateElectronicClock(float timestamp)
             => _textClock.text = Mathf.Floor(GetHoursFromTimeSpan(timestamp)).ToString("00") + " : " + Mathf.Floor(GetMinutesFromTimeSpan(timestamp)).ToString("00");
