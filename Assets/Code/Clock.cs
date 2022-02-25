@@ -1,8 +1,6 @@
-using UnityEngine;
-using TMPro;
-using System;
-using System.Collections.Generic;
 using System.Collections;
+using TMPro;
+using UnityEngine;
 
 namespace Clock
 {
@@ -17,25 +15,19 @@ namespace Clock
 
         [SerializeField] private TMP_Text _textClock;
         [SerializeField] private DateGetter _dateGetter;
-        
-        
-        [SerializeField, Range(0,10000)] private float _clockSpeed;
+        [SerializeField, Range(0, 10000)] private float _clockSpeed;
         [SerializeField] private float _currentTime;
-        private DateTime _dateTime;
-
 
         [Header("Debug")]
         [SerializeField] private bool _useLocalTime;
         [SerializeField] private float _startLocalTime;
 
-        public float CurrentTime { get => _currentTime;  }
+        public float CurrentTime { get => _currentTime; }
 
         private void Start()
         {
             _dateGetter = new DateGetter();
 
-            
-            
 
             if (_useLocalTime)
             {
@@ -46,15 +38,13 @@ namespace Clock
                 StartCoroutine(SetupDate());
             }
         }
-        
-
 
         private void FixedUpdate()
         {
 
             _currentTime += Time.fixedDeltaTime * _clockSpeed;
 
-            UpdateClock(_currentTime); 
+            UpdateClock(_currentTime);
 
         }
 
@@ -84,7 +74,7 @@ namespace Clock
         }
         private void CalculateElectronicClock(float timestamp)
             => _textClock.text = Mathf.Floor(GetHoursFromTimeSpan(timestamp)).ToString("00") + " : " + Mathf.Floor(GetMinutesFromTimeSpan(timestamp)).ToString("00");
-        
+
 
         private void CaclulateHands(float timestamp)
         {
@@ -99,6 +89,6 @@ namespace Clock
             => span / 60 / 60 % 24;
 
 
-        
+
     }
 }

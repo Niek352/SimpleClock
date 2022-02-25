@@ -1,14 +1,14 @@
-﻿using UnityEngine;
-using System;
-using UnityEngine.Networking;
+﻿using System;
 using System.Collections;
 using System.Net.Http;
+using UnityEngine;
+using UnityEngine.Networking;
 
 
 namespace Clock
 {
     [Serializable]
-    public class DateGetter 
+    public class DateGetter
     {
         public DateTime CurrentDateTime;
         public float CurrentTimestamp;
@@ -16,7 +16,7 @@ namespace Clock
 
         public string Data;
         private const string Url = "http://worldtimeapi.org/api/ip";
-        
+
         private Responce resp;
 
         public IEnumerator GetCurrentDateTime()
@@ -40,7 +40,7 @@ namespace Clock
 
         }
 
-       
+
         private async void TryGetCurrentTimeFromRapidApi()
         {
             var client = new HttpClient();
@@ -69,7 +69,6 @@ namespace Clock
 
                 IsComplete = true;
             }
-            //{"$id":"1","currentDateTime":"2022-02-23T18:13Z","utcOffset":"00:00:00","isDayLightSavingsTime":false,"dayOfTheWeek":"Wednesday","timeZoneName":"UTC","currentFileTime":132901136079667670,"ordinalDate":"2022-54","serviceResponse":null}
         }
         [Serializable]
         public class Responce
