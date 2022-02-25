@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Clock
+namespace Clock.Alarm
 {
     public class HoursInput : MonoBehaviour
     {
